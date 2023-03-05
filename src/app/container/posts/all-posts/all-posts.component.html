@@ -1,0 +1,33 @@
+
+
+<div *ngIf="postsArray.length > 0 || isLoading; else noPost">
+    <div *ngFor="let post of postsArray">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>{{post.title}}</h3>
+            </div>
+            <div class="card-body">
+                <p>{{post.content}}</p>
+            </div>
+            <div class="icon">
+                <i class="far fa-edit text-success mr-2" [routerLink]="['/posts/allposts', post.id, 'update']"></i>
+                <i class="fas fa-trash text-danger" (click)="onPostDelete(post)"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #noPost>
+    <p class="alert alert-danger" *ngIf="!error">No Posts are Available yet...!</p>
+</ng-template>
+
+<ng-container *ngIf="error">
+    <div class="alert alert-danger">
+        {{error}}
+    </div>
+</ng-container>
+
+<!-- <div class="loader" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+</div> -->
